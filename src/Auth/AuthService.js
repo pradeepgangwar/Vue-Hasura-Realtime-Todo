@@ -18,6 +18,7 @@ export default class AuthService {
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
+    audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     responseType: 'token id_token',
     scope: 'openid'
   })
@@ -26,14 +27,18 @@ export default class AuthService {
     this.auth0.authorize()
   }
 
-  handleAuthentication () {
+  handleAuthentication = client => {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
-        router.replace('dashboard')
+        // store in db
+        this.auth0.client.userInfo(authResult.accessToken, function (user) {
+          // Now you have the user's information
+          router.replace('dashboard')
+        })
       } else if (err) {
         router.replace('home')
-        console.log(err)
+        console.error(err)
         alert(`Error: ${err.error}. Check the console for further details.`)
       }
     })
@@ -48,7 +53,8 @@ export default class AuthService {
     localStorage.setItem('id_token', authResult.idToken)
     localStorage.setItem('sub', authResult.idTokenPayload.sub)
     localStorage.setItem('expires_at', expiresAt)
-    this.authNotifier.emit('authChange', { authenticated: true })
+    router.replace('dashboard')
+    // this.authNotifier.emit('authChange', { authenticated: true })
   }
 
   logout () {
@@ -56,8 +62,9 @@ export default class AuthService {
     localStorage.removeItem('access_token')
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
-    this.userProfile = null
-    this.authNotifier.emit('authChange', false)
+    localStorage.removeItem('sub')
+    // this.userProfile = null
+    // this.authNotifier.emit('authChange', false)
     // navigate to the home route
     router.replace('home')
   }
