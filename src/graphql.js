@@ -21,11 +21,28 @@ export const ADD_TODO = gql`
   }
 `
 
+export const ADD_USER = gql`
+  mutation addUser($userId: String!, $nickname: String) {
+    insert_users(
+      objects: [{
+        auth0_id: $userId
+        name: $nickname 
+      }]
+      on_conflict: {
+        constraint: users_pkey
+        update_columns: [last_seen, name]
+      }
+    ) {
+      affected_rows
+    }
+  }
+`
+
 export const ALL_PENDING_TODOS = gql`
   subscription todosQuery {
     todos(
-      where: { is_completed: { _eq: false }}
-      order_by: id_desc
+      where: { is_public: { _eq: true }, is_completed: { _eq: false }}
+      order_by: { created_at: desc }
     ) {
       id
       text
@@ -41,8 +58,8 @@ export const ALL_PENDING_TODOS = gql`
 export const ALL_COMPLETED_TODOS = gql`
   subscription todosQuery {
     todos(
-      where: { is_completed: { _eq: true }}
-      order_by: id_desc
+      where: { is_public: { _eq: true }, is_completed: { _eq: true }}
+      order_by: { created_at: desc }
     ) {
       id
       text

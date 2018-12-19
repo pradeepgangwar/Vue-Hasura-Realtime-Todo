@@ -16,9 +16,8 @@ import CompletedTodos from './CompletedTodos'
 
 export default {
   name: 'Dashboard',
-  props: ['auth'],
+  props: ['auth', 'authenticated'],
   data () {
-    this.auth.handleAuthentication()
     return {}
   },
   components: {

@@ -18,7 +18,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws'
 import { setContext } from 'apollo-link-context'
 
 const getHeaders = () => {
-  const token = localStorage.getItem('access_token')
+  const token = localStorage.getItem('id_token')
   const headers = {
     authorization: token ? `Bearer ${token}` : ''
   }
@@ -26,7 +26,7 @@ const getHeaders = () => {
 }
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('access_token')
+  const token = localStorage.getItem('id_token')
   return {
     headers: {
       ...headers,
@@ -35,7 +35,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const token = localStorage.getItem('access_token')
+const token = localStorage.getItem('id_token')
 // Create an http link:
 const httpLink = new HttpLink({
   uri: process.env.GRAPHQL_ENDPOINT,

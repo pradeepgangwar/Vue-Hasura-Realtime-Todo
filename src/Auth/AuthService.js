@@ -2,6 +2,7 @@ import auth0 from 'auth0-js'
 import { AUTH_CONFIG } from './auth0-variables'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
+// import { ADD_USER } from '@/graphql'
 
 export default class AuthService {
   authenticated = this.isAuthenticated()
@@ -27,15 +28,17 @@ export default class AuthService {
     this.auth0.authorize()
   }
 
-  handleAuthentication = client => {
+  handleAuthentication () {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
         // store in db
-        this.auth0.client.userInfo(authResult.accessToken, function (user) {
-          // Now you have the user's information
-          router.replace('dashboard')
-        })
+        // this.auth0.client.userInfo(authResult.accessToken, function (user) {
+        //   // Now you have the user's information
+        //   console.log(user.sub)
+        //   console.log(user.nickname)
+        // })
+        router.replace('dashboard')
       } else if (err) {
         router.replace('home')
         console.error(err)
@@ -53,8 +56,20 @@ export default class AuthService {
     localStorage.setItem('id_token', authResult.idToken)
     localStorage.setItem('sub', authResult.idTokenPayload.sub)
     localStorage.setItem('expires_at', expiresAt)
-    router.replace('dashboard')
-    // this.authNotifier.emit('authChange', { authenticated: true })
+
+    this.authNotifier.emit('authChange', { authenticated: true })
+  }
+
+  renewSession () {
+    this.auth0.checkSession({}, (err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        this.setSession(authResult)
+      } else if (err) {
+        this.logout()
+        console.log(err)
+        alert(`Could not get a new token (${err.error}: ${err.error_description}).`)
+      }
+    })
   }
 
   logout () {
@@ -63,8 +78,8 @@ export default class AuthService {
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
     localStorage.removeItem('sub')
-    // this.userProfile = null
-    // this.authNotifier.emit('authChange', false)
+    this.userProfile = null
+    this.authNotifier.emit('authChange', false)
     // navigate to the home route
     router.replace('home')
   }
