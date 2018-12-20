@@ -1,18 +1,17 @@
 <template>
-  <div class="container">
-    <new-todo></new-todo>
-    <br>
-    <pending-todos></pending-todos>
-    <br>
-    <completed-todos></completed-todos>
+  <div class="row">
+    <div class="container col-md-5">
+      <new-todo v-bind:isPublic=true></new-todo>
+      <br>
+      <private-todos></private-todos>
+    </div>
   </div>
 </template>
 
 <script>
 
 import NewTodo from './NewTodo'
-import PendingTodos from './PendingTodos'
-import CompletedTodos from './CompletedTodos'
+import PrivateTodos from './PrivateTodos'
 
 export default {
   name: 'Dashboard',
@@ -22,8 +21,7 @@ export default {
   },
   components: {
     NewTodo,
-    PendingTodos,
-    CompletedTodos
+    PrivateTodos
   }
 }
 

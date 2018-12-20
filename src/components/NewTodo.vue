@@ -22,10 +22,13 @@
 </template>
 
 <script>
-import { ADD_TODO } from '@/graphql'
+import { MUTATION_TODO_ADD } from '@/graphql'
 
 export default {
   name: 'NewTodo',
+  props: {
+    isPublic: Boolean
+  },
   data () {
     return {
       selected: false,
@@ -37,10 +40,16 @@ export default {
       evt.preventDefault()
       this.$apollo
         .mutate({
-          mutation: ADD_TODO,
+          mutation: MUTATION_TODO_ADD,
           variables: {
-            desc: this.todoinput,
-            userid: localStorage.getItem('sub')
+            objects: [
+              {
+                text: this.todoinput,
+                user_id: localStorage.getItem('sub'),
+                is_completed: false,
+                is_public: this.isPublic
+              }
+            ]
           }
         })
         .then(response => {
