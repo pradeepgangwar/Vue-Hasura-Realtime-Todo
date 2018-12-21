@@ -1,5 +1,16 @@
 <template>
-  <div class="row">
+  <div class="formInput">
+    <!-- <b-form @submit.prevent="onSubmit"> -->
+      <input id="todoinput"
+                    class="input"
+                    type="text"
+                    v-model="todoinput"
+                    required
+                    placeholder="What needs to be done?">
+    <!-- </b-form> -->
+    <i class="downArrow fa fa-angle-down" />
+  </div>
+  <!-- <div class="row">
     <div class="col-sm-4 offset-sm-4 text-center">
       <b-form @submit.prevent="onSubmit">
 
@@ -18,14 +29,14 @@
         <b-button type="submit" variant="primary">Submit</b-button>
       </b-form>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 import { MUTATION_TODO_ADD } from '@/graphql'
 
 export default {
-  name: 'NewTodo',
+  name: 'TodoInput',
   props: {
     isPublic: Boolean
   },

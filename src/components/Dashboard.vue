@@ -1,17 +1,40 @@
 <template>
-  <div class="row">
+  <div>
+    <div class="col-xs-12 col-md-12 col-lg-9 col-sm-12 noPadd">
+      <div>
+        <div class="col-md-6 col-sm-12 personalTodo">
+          <div class="wd95 addPaddTopBottom">
+            <div class="sectionHeader">Personal todos</div>
+            <todo-private-wrapper></todo-private-wrapper>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-sm-12 grayBgColor todoMainWrapper commonBorRight publicTodo">
+          <div class="wd95 addPaddTopBottom">
+            <div class="sectionHeader">Public todos</div>
+            <todo-public-wrapper></todo-public-wrapper>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-lg-3 col-md-12 col-sm-12 noPadd onlineUsers">
+      <!-- <OnlineUsers /> -->
+    </div>
+  </div>
+
+  <!-- <div class="row">
     <div class="container col-md-5">
       <new-todo v-bind:isPublic=true></new-todo>
       <br>
       <private-todos></private-todos>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 
-import NewTodo from './NewTodo'
-import PrivateTodos from './PrivateTodos'
+// import NewTodo from './NewTodo'
+import TodoPrivateWrapper from './TodoPrivateWrapper'
+import TodoPublicWrapper from './TodoPublicWrapper'
 
 export default {
   name: 'Dashboard',
@@ -20,8 +43,9 @@ export default {
     return {}
   },
   components: {
-    NewTodo,
-    PrivateTodos
+    // NewTodo,
+    TodoPublicWrapper,
+    TodoPrivateWrapper
   }
 }
 

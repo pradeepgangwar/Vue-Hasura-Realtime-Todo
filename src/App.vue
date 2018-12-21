@@ -1,32 +1,53 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-light bg-light nav-top">
-      <a class="navbar-brand" href="#">Realtime Vue Todo App Demo</a>
-      <div class="login-button">
-        <b-button size="sm" variant="primary" v-if="!authenticated" @click="login()">
-          Login
-        </b-button>
-        <b-button size="sm" variant="primary" v-if="authenticated" @click="logout()">
-          Logout
-        </b-button>
-      </div>
-    </nav>
+    <b-navbar fluid toggleable="md" class="removeMarBottom">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-nav class="navheader">
+        <b-navbar-brand class="navBrand">
+          Vue Apollo Todo App
+        </b-navbar-brand>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-form>
+            <b-button
+              size="sm"
+              id="qsLoginBtn"
+              bsStyle="primary"
+              class="btn-margin logoutBtn"
+              v-if="authenticated == true" @click="login()"
+            >
+              Log In
+            </b-button>
+            <b-button
+            size="sm"
+              id="qsLogoutBtn"
+              bsStyle="primary"
+              class="btn-margin logoutBtn"
+              v-if="authenticated != true" @click="logout()"
+            >
+              Log Out
+            </b-button>
+          </b-nav-form>
+        </b-navbar-nav>
+      </b-navbar-nav>
+    </b-navbar>
     <br>
     <router-view
       :auth="auth"
       :authenticated="authenticated">
     </router-view>
   </div>
+
 </template>
 
 <script>
 
-import PrivateTodos from './components/PrivateTodos'
 import AuthService from './Auth/AuthService'
 import router from './router'
 
 const auth = new AuthService()
-const { login, logout, authenticated, authNotifier } = auth
+const { login, logout, authNotifier } = auth
+
+const authenticated = localStorage.getItem('isLoggedIn')
 
 export default {
   name: 'app',
@@ -45,9 +66,6 @@ export default {
   methods: {
     login,
     logout
-  },
-  components: {
-    PrivateTodos
   }
 }
 

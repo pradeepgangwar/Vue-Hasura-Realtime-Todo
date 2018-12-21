@@ -16,6 +16,7 @@ import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 import { setContext } from 'apollo-link-context'
+import './styles/app.css'
 
 const getHeaders = () => {
   const token = localStorage.getItem('id_token')

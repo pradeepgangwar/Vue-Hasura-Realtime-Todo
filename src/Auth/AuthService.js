@@ -2,7 +2,6 @@ import auth0 from 'auth0-js'
 import { AUTH_CONFIG } from './auth0-variables'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
-// import { ADD_USER } from '@/graphql'
 
 export default class AuthService {
   authenticated = this.isAuthenticated()
@@ -32,12 +31,7 @@ export default class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
-        // store in db
-        // this.auth0.client.userInfo(authResult.accessToken, function (user) {
-        //   // Now you have the user's information
-        //   console.log(user.sub)
-        //   console.log(user.nickname)
-        // })
+
         router.replace('dashboard')
       } else if (err) {
         router.replace('home')

@@ -1,5 +1,28 @@
 <template>
-  <div class="row">
+  <div class="todoWrapper">
+    <!-- <TodoInput userId={userId} type="private" /> -->
+    <div class="todoListwrapper">
+      <ul>
+        <TodoItem
+          key={index}
+          index={index}
+          todo={todo}
+          type={type}
+          userId={userId}
+        />
+      </ul>
+    </div>
+    <!-- <TodoFilters
+      todos={finalData}
+      userId={userId}
+      type={type}
+      currentFilter={this.state.filter}
+      filterResults={this.filterResults.bind(this)}
+      clearInProgress={this.state.clearInProgress}
+    /> -->
+    <TodoPrivateList userId={userId} type="private" />
+  </div>
+  <!-- <div class="row">
     <div class="col-sm-10 offset-sm-1">
       <table class="table table-hover table-bordered table-striped" v-if="todos.length > 0">
         <thead>
@@ -19,7 +42,7 @@
         </thead>
       </table>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -29,10 +52,10 @@ import TodoItem from './TodoItem'
 const userId = localStorage.getItem('sub')
 
 export default {
-  name: 'PendingTodos',
+  name: 'TodoPrivateList',
   data () {
     return {
-      todos: []
+      todo: []
     }
   },
   components: {
@@ -46,7 +69,7 @@ export default {
           userId: userId
         },
         result (data) {
-          this.todos = data.data.todos
+          this.todo = data.data.todos
         }
       }
     }
