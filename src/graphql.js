@@ -17,7 +17,7 @@ export const USER_FRAGMENT = gql`
 `
 
 export const QUERY_PRIVATE_TODO = gql`
-  query fetch_todos($userId: String!) {
+  subscription fetch_todos($userId: String!) {
     todos(
       where: { is_public: { _eq: false }, user_id: { _eq: $userId } }
       order_by: { created_at: desc }

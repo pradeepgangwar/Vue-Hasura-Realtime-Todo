@@ -20,19 +20,10 @@
       <!-- <OnlineUsers /> -->
     </div>
   </div>
-
-  <!-- <div class="row">
-    <div class="container col-md-5">
-      <new-todo v-bind:isPublic=true></new-todo>
-      <br>
-      <private-todos></private-todos>
-    </div>
-  </div> -->
 </template>
 
 <script>
 
-// import NewTodo from './NewTodo'
 import TodoPrivateWrapper from './TodoPrivateWrapper'
 import TodoPublicWrapper from './TodoPublicWrapper'
 
@@ -43,7 +34,6 @@ export default {
     return {}
   },
   components: {
-    // NewTodo,
     TodoPublicWrapper,
     TodoPrivateWrapper
   }

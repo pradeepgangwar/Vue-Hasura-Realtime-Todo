@@ -1,8 +1,8 @@
 <template>
-    <div class="todoWrapper">
-        <todo-input v-bind:isPublic=true></todo-input>
-        <!-- <todo-public-list></todo-public-list> -->
-    </div>
+  <div class="todoWrapper">
+      <todo-input v-bind:isPublic=true></todo-input>
+      <todo-public-list></todo-public-list>
+  </div>
 </template>
 
 <script>

@@ -13,7 +13,7 @@
               id="qsLoginBtn"
               bsStyle="primary"
               class="btn-margin logoutBtn"
-              v-if="authenticated == true" @click="login()"
+              v-if="authenticated == null" @click="login()"
             >
               Log In
             </b-button>
@@ -22,7 +22,7 @@
               id="qsLogoutBtn"
               bsStyle="primary"
               class="btn-margin logoutBtn"
-              v-if="authenticated != true" @click="logout()"
+              v-if="authenticated" @click="logout()"
             >
               Log Out
             </b-button>
@@ -48,7 +48,7 @@ const auth = new AuthService()
 const { login, logout, authNotifier } = auth
 
 const authenticated = localStorage.getItem('isLoggedIn')
-
+console.log(authenticated)
 export default {
   name: 'app',
   data () {
