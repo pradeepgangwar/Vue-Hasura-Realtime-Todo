@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "node server.js",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
@@ -24,6 +24,7 @@
     "apollo-utilities": "^1.0.25",
     "auth0-js": "^9.8.1",
     "bootstrap-vue": "^2.0.0-rc.11",
+    "express": "^4.16.4",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "i": "^0.3.6",
