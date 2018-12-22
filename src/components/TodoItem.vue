@@ -1,7 +1,7 @@
 <template>
   <li :key="todo.id">
-    <div v-if="todo.is_public == true" class="userInfoPublic" title={todo.user.name}>
-      {todo.user.name.charAt(0).toUpperCase()}
+    <div v-if="todo.is_public == true" class="userInfoPublic" :title=todo.user.name>
+      {{todo.user.name.charAt(0).toUpperCase()}}
     </div>
     <div class="view" @click="updateTodo(todo)">
       <!-- if todo completed -->

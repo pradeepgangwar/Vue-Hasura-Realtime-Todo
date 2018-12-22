@@ -27,12 +27,36 @@ export const QUERY_PRIVATE_TODO = gql`
   }
   ${TODO_FRAGMENT}
 `
+
+export const SUBSCRIPTION_ONLINE_USERS = gql`
+  subscription {
+    online_users(order_by: { name: asc }) {
+      name
+    }
+  }
+`
+
 export const QUERY_PUBLIC_TODO = gql`
   query fetch_todos($todoLimit: Int!, $todoId: Int!) {
     todos(
       where: { is_public: { _eq: true }, id: { _gt: $todoId } }
       order_by: { created_at: desc }
       limit: $todoLimit
+    ) {
+      ...TodoFragment
+      user {
+        ...UserFragment
+      }
+    }
+  }
+  ${TODO_FRAGMENT}
+  ${USER_FRAGMENT}
+`
+export const QUERY_PUBLIC_TODO_ALL = gql`
+  subscription fetch_todos {
+    todos(
+      where: { is_public: { _eq: true } }
+      order_by: { created_at: desc }
     ) {
       ...TodoFragment
       user {

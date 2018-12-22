@@ -30,7 +30,6 @@ export default {
           userId: userId
         },
         result (data) {
-          console.log(data)
           this.todos = data.data.todos
         }
       }

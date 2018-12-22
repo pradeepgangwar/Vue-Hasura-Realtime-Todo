@@ -48,7 +48,7 @@ const auth = new AuthService()
 const { login, logout, authNotifier } = auth
 
 const authenticated = localStorage.getItem('isLoggedIn')
-console.log(authenticated)
+
 export default {
   name: 'app',
   data () {

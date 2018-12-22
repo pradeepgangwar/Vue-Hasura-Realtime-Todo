@@ -16,12 +16,11 @@
 
 <script>
 
-import { QUERY_PRIVATE_TODO } from '@/graphql'
+import { QUERY_PUBLIC_TODO_ALL } from '@/graphql'
 import TodoItem from './TodoItem'
-const userId = localStorage.getItem('sub')
 
 export default {
-  name: 'TodoPrivateList',
+  name: 'TodoPublicList',
   data () {
     return {
       todos: []
@@ -33,10 +32,7 @@ export default {
   apollo: {
     $subscribe: {
       todosQuery: {
-        query: QUERY_PRIVATE_TODO,
-        variables: {
-          userId: userId
-        },
+        query: QUERY_PUBLIC_TODO_ALL,
         result (data) {
           this.todos = data.data.todos
         }

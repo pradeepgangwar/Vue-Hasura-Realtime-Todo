@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="col-xs-12 col-lg-3 col-md-12 col-sm-12 noPadd onlineUsers">
-      <!-- <OnlineUsers /> -->
+      <online-users></online-users>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@
 
 import TodoPrivateWrapper from './TodoPrivateWrapper'
 import TodoPublicWrapper from './TodoPublicWrapper'
+import OnlineUsers from './OnlineUsers'
 
 export default {
   name: 'Dashboard',
@@ -35,7 +36,8 @@ export default {
   },
   components: {
     TodoPublicWrapper,
-    TodoPrivateWrapper
+    TodoPrivateWrapper,
+    OnlineUsers
   }
 }
 
