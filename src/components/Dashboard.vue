@@ -19,6 +19,33 @@
     <div class="col-xs-12 col-lg-3 col-md-12 col-sm-12 noPadd onlineUsers">
       <online-users></online-users>
     </div>
+    <div class="footerWrapper">
+      <span>
+        <a
+          href="https://react-apollo-todo-demo.hasura.app/console"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Backend
+          <i class="fa fa-angle-double-right" />
+        </a>
+      </span>
+      <span class="footerLinkPadd accessKey">
+        <button>
+          Access Key: hasurademoapp
+        </button>
+      </span>
+      <span class="footerLinkPadd">
+        <a
+          href="https://github.com/hasura/graphql-engine/tree/master/community/tutorials/react-apollo-todo"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Github
+          <i class="fa fa-angle-double-right" />
+        </a>
+      </span>
+    </div>
   </div>
 </template>
 
