@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nav-bar></nav-bar>
     <div class="col-xs-12 col-md-12 col-lg-9 col-sm-12 noPadd">
       <div>
         <div class="col-md-6 col-sm-12 personalTodo">
@@ -54,17 +55,18 @@
 import TodoPrivateWrapper from './TodoPrivateWrapper'
 import TodoPublicWrapper from './TodoPublicWrapper'
 import OnlineUsers from './OnlineUsers'
+import NavBar from './NavBar'
 
 export default {
   name: 'Dashboard',
-  props: ['auth', 'authenticated'],
   data () {
     return {}
   },
   components: {
     TodoPublicWrapper,
     TodoPrivateWrapper,
-    OnlineUsers
+    OnlineUsers,
+    NavBar
   }
 }
 

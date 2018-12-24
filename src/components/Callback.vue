@@ -5,11 +5,15 @@
 </template>
 
 <script>
+
+import AuthService from '@/Auth/AuthService'
+
+const auth = new AuthService()
 export default {
   name: 'callback',
-  props: ['auth'],
+
   created () {
-    this.auth.handleAuthentication()
+    auth.handleAuthentication()
   }
 }
 </script>
