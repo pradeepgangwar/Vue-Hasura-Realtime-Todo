@@ -17,7 +17,7 @@ export const USER_FRAGMENT = gql`
 `
 
 export const QUERY_PRIVATE_TODO = gql`
-  subscription fetch_todos($userId: String!) {
+  query fetch_todos($userId: String!) {
     todos(
       where: { is_public: { _eq: false }, user_id: { _eq: $userId } }
       order_by: { created_at: desc }
@@ -53,7 +53,7 @@ export const QUERY_PUBLIC_TODO = gql`
   ${USER_FRAGMENT}
 `
 export const QUERY_PUBLIC_TODO_ALL = gql`
-  subscription fetch_todos {
+  query fetch_todos {
     todos(
       where: { is_public: { _eq: true } }
       order_by: { created_at: desc }
@@ -124,6 +124,16 @@ export const MUTATION_TODO_UPDATE = gql`
   }
 `
 
+export const DELETE_TODO_FILTER = gql`
+  mutation ($isPublic: Boolean!) {
+    delete_todos (
+      where: { is_completed: {_eq: true}, is_public: {_eq: $isPublic}}
+    ) {
+      affected_rows
+    }
+  }
+`
+
 export const MUTATION_TODO_DELETE = gql`
   mutation delete_todos($todoId: Int!) {
     delete_todos(where: { id: { _eq: $todoId } }) {
@@ -133,7 +143,7 @@ export const MUTATION_TODO_DELETE = gql`
 `
 
 export const SUBSCRIPTION_TODO_PUBLIC_LIST = gql`
-  subscription($todoId: Int!) {
+  query($todoId: Int!) {
     todos(
       where: { is_public: { _eq: true }, id: { _gt: $todoId } }
       order_by: { created_at: desc }

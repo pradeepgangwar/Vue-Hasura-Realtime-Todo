@@ -2,6 +2,7 @@
   <div class="todoListwrapper">
     <ul>
       <todo-item v-for="todo in todos" :key="todo.id" v-bind:todo=todo></todo-item>
+      <todo-filters v-bind:todos=todos type='private' currentFilter='all'></todo-filters>
     </ul>
   </div>
 </template>
@@ -10,6 +11,7 @@
 
 import { QUERY_PRIVATE_TODO } from '@/graphql'
 import TodoItem from './TodoItem'
+import TodoFilters from './TodoFilters'
 const userId = localStorage.getItem('sub')
 
 export default {
@@ -20,7 +22,8 @@ export default {
     }
   },
   components: {
-    TodoItem
+    TodoItem,
+    TodoFilters
   },
   apollo: {
     $subscribe: {
