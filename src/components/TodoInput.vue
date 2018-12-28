@@ -41,6 +41,30 @@ export default {
               }
             ]
           }
+          // update: (store, { data: { insertTodos } }) => {
+          //   const query = QUERY_PRIVATE_TODO
+          //   const userId = localStorage.getItem('sub')
+          //   try {
+          //     if (!this.isPublic) {
+          //       const data = store.readQuery({
+          //         query: query,
+          //         variables: { userId: userId }
+          //       })
+          //       const insertedTodo = insertTodos.returning
+          //       console.log(data)
+          //       data.todos.splice(0, 0, insertedTodo[0])
+          //       store.writeQuery({
+          //         query: query,
+          //         variables: {
+          //           userId: userId
+          //         },
+          //         data
+          //       })
+          //     }
+          //   } catch (e) {
+          //     console.error(e)
+          //   }
+          // }
         })
         .then(response => {
           this.todoinput = ''

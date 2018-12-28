@@ -5,32 +5,51 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    todos: [],
+    publicTodos: [],
+    privateTodos: [],
+    currentPublicFilter: 'all',
     currentFilter: 'all',
     clearInProgress: false
   },
   mutations: {
-    addTodo (state, payload) {
-      state.todos.push(payload)
+    addPublicTodo (state, payload) {
+      state.publicTodos.push(payload)
+    },
+    addPrivateTodo (state, payload) {
+      state.privateTodos.push(payload)
     },
     changeFilter (state, payload) {
       state.currentFilter = payload
+    },
+    changePublicFilter (state, payload) {
+      state.currentPublicFilter = payload
     },
     changeProgress (state, payload) {
       state.clearInProgress = payload
     }
   },
   getters: {
-    todos (state) {
+    publicTodos (state) {
       if (state.currentFilter === 'active') {
-        return state.todos.filter(todo => todo.is_completed !== true)
+        return state.publicTodos.filter(todo => todo.is_completed !== true)
       } else if (state.currentFilter === 'completed') {
-        return state.todos.filter(todo => todo.is_completed === true)
+        return state.publicTodos.filter(todo => todo.is_completed === true)
       }
-      return state.todos
+      return state.publicTodos
+    },
+    privateTodos (state) {
+      if (state.currentFilter === 'active') {
+        return state.privateTodos.filter(todo => todo.is_completed !== true)
+      } else if (state.currentFilter === 'completed') {
+        return state.privateTodos.filter(todo => todo.is_completed === true)
+      }
+      return state.privateTodos
     },
     currentFilter (state) {
       return state.currentFilter
+    },
+    currentPublicFilter (state) {
+      return state.currentPublicFilter
     },
     clearInProgress (state) {
       return state.clearInProgress

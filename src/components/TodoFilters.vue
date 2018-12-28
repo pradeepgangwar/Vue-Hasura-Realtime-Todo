@@ -47,3 +47,11 @@ export default {
 }
 
 </script>
+
+<style>
+
+.footerList ul li {
+  padding: 1em;
+}
+
+</style>

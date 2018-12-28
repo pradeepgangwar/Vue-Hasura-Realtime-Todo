@@ -1,40 +1,48 @@
 <template>
     <div class="todoListwrapper">
       <ul>
-        <todo-item v-for="todo in todos" :key="todo.id" v-bind:todo=todo></todo-item>
+        <todo-item v-for="todo in todos[0]" :key="todo.id" v-bind:todo=todo></todo-item>
+        <todo-filters
+          v-bind:todos=todos
+          type='public'
+          v-bind:currentPublicFilter=currentPublicFilter
+          v-on:filterResults="filterResults"
+        ></todo-filters>
       </ul>
     </div>
-    <!-- <TodoFilters
-      todos={finalData}
-      userId={userId}
-      type={type}
-      currentFilter={this.state.filter}
-      filterResults={this.filterResults.bind(this)}
-      clearInProgress={this.state.clearInProgress}
-    /> -->
 </template>
 
 <script>
 
 import { QUERY_PUBLIC_TODO_ALL } from '@/graphql'
 import TodoItem from './TodoItem'
+import TodoFilters from './TodoFilters'
 
 export default {
   name: 'TodoPublicList',
-  data () {
-    return {
-      todos: []
+  computed: {
+    todos () {
+      return this.$store.getters.publicTodos
+    },
+    currentPublicFilter () {
+      return this.$store.getters.currentPublicFilter
     }
   },
   components: {
-    TodoItem
+    TodoItem,
+    TodoFilters
+  },
+  methods: {
+    filterResults (type) {
+      this.$store.commit('changePublicFilter', type)
+    }
   },
   apollo: {
     $subscribe: {
       todosQuery: {
         query: QUERY_PUBLIC_TODO_ALL,
         result (data) {
-          this.todos = data.data.todos
+          this.$store.commit('addPublicTodo', data.data.todos)
         }
       }
     }

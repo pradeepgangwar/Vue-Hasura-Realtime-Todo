@@ -23,14 +23,9 @@ const userId = localStorage.getItem('sub')
 
 export default {
   name: 'TodoPrivateList',
-  // data () {
-  //   return {
-  //     todos: []
-  //   }
-  // },
   computed: {
     todos () {
-      return this.$store.getters.todos
+      return this.$store.getters.privateTodos
     },
     currentFilter () {
       return this.$store.getters.currentFilter
@@ -79,7 +74,7 @@ export default {
           userId: userId
         },
         result (data) {
-          this.$store.commit('addTodo', data.data.todos)
+          this.$store.commit('addPrivateTodo', data.data.todos)
         }
       }
     }
