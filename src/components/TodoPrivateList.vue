@@ -1,7 +1,7 @@
 <template>
   <div class="todoListwrapper">
     <ul>
-      <todo-item v-for="todo in todos[0]" :key="todo.id" v-bind:todo=todo></todo-item>
+      <todo-item v-for="todo in todos" :key="todo.id" v-bind:todo=todo></todo-item>
       <todo-filters
         v-bind:todos=todos
         type='private'
@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     clearCompleted (type) {
-      console.log('Hi from clear')
       // mutation to delete all is_completed with is_public clause
       const isOk = window.confirm('Are you sure?')
       if (isOk) {

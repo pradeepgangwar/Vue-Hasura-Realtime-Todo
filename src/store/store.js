@@ -13,10 +13,12 @@ export const store = new Vuex.Store({
   },
   mutations: {
     addPublicTodo (state, payload) {
-      state.publicTodos.push(payload)
+      state.publicTodos = []
+      state.publicTodos = state.publicTodos.concat(payload)
     },
     addPrivateTodo (state, payload) {
-      state.privateTodos.push(payload)
+      state.privateTodos = []
+      state.privateTodos = state.privateTodos.concat(payload)
     },
     changeFilter (state, payload) {
       state.currentFilter = payload
@@ -30,9 +32,9 @@ export const store = new Vuex.Store({
   },
   getters: {
     publicTodos (state) {
-      if (state.currentFilter === 'active') {
+      if (state.currentPublicFilter === 'active') {
         return state.publicTodos.filter(todo => todo.is_completed !== true)
-      } else if (state.currentFilter === 'completed') {
+      } else if (state.currentPublicFilter === 'completed') {
         return state.publicTodos.filter(todo => todo.is_completed === true)
       }
       return state.publicTodos

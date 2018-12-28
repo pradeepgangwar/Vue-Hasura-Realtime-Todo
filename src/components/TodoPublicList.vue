@@ -1,11 +1,11 @@
 <template>
     <div class="todoListwrapper">
       <ul>
-        <todo-item v-for="todo in todos[0]" :key="todo.id" v-bind:todo=todo></todo-item>
+        <todo-item v-for="todo in todos" :key="todo.id" v-bind:todo=todo></todo-item>
         <todo-filters
           v-bind:todos=todos
           type='public'
-          v-bind:currentPublicFilter=currentPublicFilter
+          v-bind:currentFilter=currentPublicFilter
           v-on:filterResults="filterResults"
         ></todo-filters>
       </ul>
