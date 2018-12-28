@@ -18,6 +18,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 import { setContext } from 'apollo-link-context'
 import './styles/app.css'
+import { store } from './store/store'
 
 const getHeaders = () => {
   const token = localStorage.getItem('id_token')
@@ -99,6 +100,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   apolloProvider,
   components: { App },
   template: '<App/>'
